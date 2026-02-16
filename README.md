@@ -1,37 +1,50 @@
-# SilverBullet plug template
-Insert your plug description here. 
-
-## Development preparation
-1. In your (development) space, create a folder under `Library/` that you can use as a namespace, for instance using your Github username:
-```bash
-mkdir -p ~/myspace/Library/you
-```
-
-2. Symlink this plug's folder into your namespaced folder:
-
-```bash
-ln -s $PWD ~/myspace/Library/you/hello
-```
-
-3. Update the `name` attribute in `PLUG.md` to match the location of that PLUG file in your space, and the file name of the destination `.plug.js` file as well e.g.
-```
 ---
-name: Library/you/hello/PLUG
+description: "Quint syntax highlight for Silverbullet"
 tags: meta/library
 files:
-- myplug.plug.js
+- quint.plug.js
 ---
+
+# Quint syntax highlight for Silverbullet
+
+This plug adds syntax highlight for [Quint](https://quint-lang.org/) via fenced code blocks.
+
+Install with: `github:marceloadsj/silverbullet-quint-plug/quint.plug.js`
+
+```quint
+module bank {
+  /// A state variable to store the balance of each account
+  var balances: str -> int
+ 
+  pure val ADDRESSES = Set("alice", "bob", "charlie")
+ 
+  action deposit(account, amount) = {
+    // Increment balance of account by amount
+    balances' = balances.setBy(account, curr => curr + amount)
+  }
+ 
+  action withdraw(account, amount) = {
+    // Decrement balance of account by amount
+    balances' = balances.setBy(account, curr => curr - amount)
+  }
+ 
+  action init = {
+    // At the initial state, all balances are zero
+    balances' = ADDRESSES.mapBy(_ => 0)
+  }
+ 
+  action step = {
+    // Non-deterministically pick an address and an amount
+    nondet account = ADDRESSES.oneOf()
+    nondet amount = 1.to(100).oneOf()
+    // Non-deterministically choose to either deposit or withdraw
+    any {
+      deposit(account, amount),
+      withdraw(account, amount),
+    }
+  }
+ 
+  /// An invariant stating that all accounts should have a non-negative balance
+  val no_negatives = ADDRESSES.forall(addr => balances.get(addr) >= 0)
+}
 ```
-
-## Build
-To build this plug, make sure you have [Deno installed](https://docs.deno.com/runtime/). Then, build the plug with:
-
-```shell
-deno task build
-```
-
-Within ~20s SilverBullet will automatically sync your plug code, just watch your browser's JavaScript console to see when this happens. Then run the `Plugs: Reload` command to reload and reactivate the plug (no reload required).
-
-## Distribution
-1. Commit the compiled `.plug.js` file to the repository
-2. Other people can now install your plug via the `Library: Install` command using the URL to your PLUG.md file as URI, e.g. `https://github.com/silverbulletmd/silverbullet-plug-template/blob/main/PLUG.md`
