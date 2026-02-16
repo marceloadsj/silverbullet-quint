@@ -1,6 +1,7 @@
 import { CodeWidgetContent } from "@silverbulletmd/silverbullet/type/client";
 import { createHighlighterCore } from "shiki/core"
 import nord from "@shikijs/themes/nord"
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 export async function quint(bodyText: string): Promise<CodeWidgetContent> {
   const highlighter = await createHighlighterCore({
@@ -12,6 +13,7 @@ export async function quint(bodyText: string): Promise<CodeWidgetContent> {
         grammar: QUINT_TMLANGUAGE,
       },
     ],
+    engine: createOnigurumaEngine(import('shiki/wasm'))
   });
 
   return {
