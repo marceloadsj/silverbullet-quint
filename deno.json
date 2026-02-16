@@ -17,6 +17,7 @@
     ]
   },
   "imports": {
+    "@shikijs/themes": "npm:@shikijs/themes@^3.22.0",
     "@silverbulletmd/silverbullet": "jsr:@silverbulletmd/silverbullet@^2.3.0",
     "shiki": "npm:shiki@^3.22.0"
   }

@@ -1,9 +1,10 @@
 import { CodeWidgetContent } from "@silverbulletmd/silverbullet/type/client";
-import { createHighlighter } from "shiki";
+import { createHighlighterCore } from "shiki/core"
+import nord from "@shikijs/themes/nord"
 
 export async function quint(bodyText: string): Promise<CodeWidgetContent> {
-  const highlighter = await createHighlighter({
-    theme: "nord",
+  const highlighter = await createHighlighterCore({
+    theme: nord,
     langs: [
       {
         id: "quint",
@@ -14,7 +15,9 @@ export async function quint(bodyText: string): Promise<CodeWidgetContent> {
   });
 
   return {
-    html: highlighter.codeToHtml(bodyText, { lang: "quint" }),
+    html: highlighter.codeToHtml(bodyText, {
+      lang: "quint", theme: "nord"
+    }),
   };
 }
 
