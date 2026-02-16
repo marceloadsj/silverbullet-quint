@@ -6,19 +6,13 @@ import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 export async function quint(bodyText: string): Promise<CodeWidgetContent> {
   const highlighter = await createHighlighterCore({
     themes: [nord],
-    langs: [
-      {
-        id: "quint",
-        scopeName: QUINT_TMLANGUAGE.scopeName,
-        grammar: QUINT_TMLANGUAGE,
-      },
-    ],
+    langs: [QUINT_TMLANGUAGE],
     engine: createOnigurumaEngine(import('shiki/wasm'))
   });
 
   return {
     html: highlighter.codeToHtml(bodyText, {
-      lang: "quint", theme: "nord"
+      lang: "Quint", theme: "nord"
     }),
   };
 }
