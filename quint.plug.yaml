@@ -1,0 +1,6 @@
+name: quint
+version: 0.1
+functions:
+  quintWidget:
+    path: ./quint.ts:quint
+    codeWidget: quint

@@ -1,7 +1,7 @@
 ---
-name: Library/you/hello/PLUG
+name: Library/marceloadsj/quint
 tags: meta/library
 files:
-- hello.plug.js
+- quint.plug.js
 ---
-This library does A, B and C.
+Adds a fence block for quint-lang
