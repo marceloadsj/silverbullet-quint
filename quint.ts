@@ -5,7 +5,7 @@ import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 export async function quint(bodyText: string): Promise<CodeWidgetContent> {
   const highlighter = await createHighlighterCore({
-    theme: nord,
+    themes: [nord],
     langs: [
       {
         id: "quint",
