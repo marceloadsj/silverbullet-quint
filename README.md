@@ -9,7 +9,7 @@ files:
 
 This plug adds syntax highlight for [Quint](https://quint-lang.org/) via fenced code blocks.
 
-Install with: `github:marceloadsj/silverbullet-quint-plug/quint.plug.js`
+Install with: `github:marceloadsj/silverbullet-quint/quint.plug.js`
 
 ```quint
 module bank {
