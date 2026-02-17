@@ -1,19 +1,33 @@
 import { CodeWidgetContent } from "@silverbulletmd/silverbullet/type/client";
 import { createHighlighterCore } from "shiki/core"
-import nord from "@shikijs/themes/nord"
+import dracula from "@shikijs/themes/dracula"
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 export async function quint(bodyText: string): Promise<CodeWidgetContent> {
   const highlighter = await createHighlighterCore({
-    themes: [nord],
+    themes: [dracula],
     langs: [QUINT_TMLANGUAGE],
     engine: createOnigurumaEngine(import('shiki/wasm'))
   });
 
+  const code = highlighter.codeToHtml(bodyText, {
+    lang: "Quint", theme: "nord"
+  });
+
   return {
-    html: highlighter.codeToHtml(bodyText, {
-      lang: "Quint", theme: "nord"
-    }),
+    html: `
+    <style>
+      body {
+        margin: 0px;
+      }
+
+      pre {
+        margin: 0px;
+        padding: 10px;
+      }
+    </style>
+    
+    ${code}`,
   };
 }
 
