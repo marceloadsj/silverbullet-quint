@@ -1,5 +1,5 @@
 name: quint
-version: 0.6
+version: 0.7
 functions:
   quintWidget:
     path: ./quint.ts:quint

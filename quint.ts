@@ -11,7 +11,7 @@ export async function quint(bodyText: string): Promise<CodeWidgetContent> {
   });
 
   const code = highlighter.codeToHtml(bodyText, {
-    lang: "Quint", theme: "nord"
+    lang: "Quint", theme: "dracula"
   });
 
   return {
